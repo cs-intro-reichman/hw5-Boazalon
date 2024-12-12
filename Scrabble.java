@@ -122,11 +122,11 @@ public class Scrabble {
 				break;
 			}
 			if (isWordInDictionary(input) == false) {
-				System.out.println("No such word in the dictionary. Try again.");
+                System.out.println("Invalid word. Try again.");
 			} else {
 				score += wordScore(input);
-				System.out.println(input + " earned " + wordScore(input) + " points. Score: " + score + " points");
-				System.out.println();
+                System.out.println(input + " earned "+ wordScore(input) +" points. Score: "+ score +" points.");
+                System.out.println();
 				hand = MyString.remove(hand, input);
 			}
 

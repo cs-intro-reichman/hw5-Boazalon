@@ -56,7 +56,7 @@ public class Scrabble {
 	public static boolean isWordInDictionary(String word) {
 
 		for (int i = 0; i < NUM_OF_WORDS; i++) {
-			if (DICTIONARY[i] == word) {
+			if (word.equals(DICTIONARY[i])) {
 				return true;
 			}
 		}
@@ -156,15 +156,13 @@ public class Scrabble {
 			String input = in.readString();
 			//// Replace the following break statement with code
 			//// that completes the game playing loop
-			if (input.equals("n") ) {
-				playHand(createHand());
-			}
-			if (input.equals("e")) {
-				break;
-			}
-			else  {
-				System.out.println("error");
-			}
+			if(input.equals("n")){
+                playHand(createHand());
+            } else if(input.equals("e")) {
+                break;
+            } else {
+                System.out.println("Invalid word. Try again.");
+            }
 			
 		}
 	}

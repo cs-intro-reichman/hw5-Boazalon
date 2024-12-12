@@ -69,13 +69,13 @@ public class Scrabble {
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
 		int score = 0;
-		
+
 		for (int i = 0; i < word.length(); i++) {
-			score += SCRABBLE_LETTER_VALUES[((int) word.charAt(i) )- 97];
+			score += SCRABBLE_LETTER_VALUES[((int) word.charAt(i)) - 97];
 		}
 		score = score * word.length();
 
-		if ( MyString.subsetOf("runi", word)==true) {
+		if (MyString.subsetOf("runi", word) == true) {
 			score += 1000;
 		}
 		if (word.length() == HAND_SIZE) {
@@ -89,13 +89,10 @@ public class Scrabble {
 	// into it, at random indexes, the letters 'a' and 'e'
 	// (these two vowels make it easier for the user to construct words)
 	public static String createHand() {
-		String wordhand = "";
-		for(int i = 0 ; i < (HAND_SIZE-2); i++){
-			if (Math.random()<0.5) {
-				wordhand += "a";
-			}
-			else wordhand += "e";
-		}
+		String wordhand = MyString.randomStringOfLetters(HAND_SIZE - 2);
+		wordhand = MyString.insertRandomly('e', wordhand);
+		wordhand = MyString.insertRandomly('a', wordhand);
+
 		return wordhand;
 	}
 
@@ -121,18 +118,17 @@ public class Scrabble {
 			String input = in.readString();
 			//// Replace the following break statement with code
 			//// that completes the hand playing loop
-			if (input == ".") {
-				break;	
+			if (input.equals(".")) {
+				break;
 			}
-			if(isWordInDictionary(input)== false){
+			if (isWordInDictionary(input) == false) {
 				System.out.println("No such word in the dictionary. Try again.");
-			}
-			else{
+			} else {
 				score += wordScore(input);
-				System.out.println(input+" earned "+ wordScore(input)+" points. Score: "+score+" points");
+				System.out.println(input + " earned " + wordScore(input) + " points. Score: " + score + " points");
+				System.out.println();
 				hand = MyString.remove(hand, input);
 			}
-			
 
 		}
 		if (hand.length() == 0) {
@@ -140,6 +136,7 @@ public class Scrabble {
 		} else {
 			System.out.println("End of hand. Total score: " + score + " points");
 		}
+
 	}
 
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand,
@@ -159,12 +156,16 @@ public class Scrabble {
 			String input = in.readString();
 			//// Replace the following break statement with code
 			//// that completes the game playing loop
-			if (input == "n") {
+			if (input.equals("n") ) {
 				playHand(createHand());
 			}
-			if (input=="e") {
-				break;	
+			if (input.equals("e")) {
+				break;
 			}
+			else  {
+				System.out.println("error");
+			}
+			
 		}
 	}
 
